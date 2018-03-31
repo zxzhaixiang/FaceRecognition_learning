@@ -1,7 +1,7 @@
 from benchmarker import Benchmarker
 
 ## specify number of loop
-with Benchmarker(2000*2000, width=20) as bench:
+with Benchmarker(5000*5000, width=20) as bench:
     s1, s2, s3, s4, s5 = "Haruhi", "Mikuru", "Yuki", "Itsuki", "Kyon"
 
     @bench(None)                ## empty loop
