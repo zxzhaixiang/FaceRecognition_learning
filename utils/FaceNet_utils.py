@@ -7,6 +7,7 @@
 from keras.models import model_from_json
 import numpy as np
 from scipy import misc
+import os
 
 
 # In[1]:
@@ -37,10 +38,34 @@ def evaluate_model(model, X_train, Y_train, X_test, Y_test, maxItem = 100):
     print ("Test Accuracy = " + str(preds[1]))
 
 
+# In[2]:
+
+
+def load_QRIFaceData(datapath = '/media/xiang/60DA18E2DA18B5EE/projects/computerVision/QRI_faces_clean/'):
+    
+    FaceData = []
+    labels = []
+    name_list = []
+    facefiles = os.listdir(datapath)
+    for i,facefile in enumerate(facefiles):
+        im = misc.imread(datapath+facefile)
+        im = misc.imresize(im,(96,96,3))
+        im = np.around(np.transpose(im, (2,0,1))/255.0, decimals=12)
+        #im = np.transpose(im,[2,0,1])
+        FaceData.append(im)
+        labels.append(i)
+        name_list.append(facefile[0:-4])
+
+    labels = np.array(labels)
+    FaceData = np.array(FaceData)
+    labels_OH = one_hot(labels)
+    return FaceData, labels,labels_OH, name_list
+
+
 # In[3]:
 
 
-def load_FaceData(datapath = './../Dataset/CaltechFaceSet/processed/', nFace = 450):
+def load_FaceData(nFace, datapath = './../Dataset/CaltechFaceSet/processed/'):
     FaceData = []
     for iFace in range(nFace):
         im = misc.imread(datapath+'cf%04d.png' % iFace)
