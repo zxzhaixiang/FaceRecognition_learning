@@ -51,6 +51,7 @@ def load_QRIFaceData(datapath = '/media/xiang/60DA18E2DA18B5EE/projects/computer
         im = misc.imread(datapath+facefile)
         im = misc.imresize(im,(96,96,3))
         im = np.around(np.transpose(im, (2,0,1))/255.0, decimals=12)
+        #im = np.transpose(im, (2,0,1))
         #im = np.transpose(im,[2,0,1])
         FaceData.append(im)
         labels.append(i)
