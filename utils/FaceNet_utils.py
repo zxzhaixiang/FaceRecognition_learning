@@ -41,7 +41,7 @@ def evaluate_model(model, X_train, Y_train, X_test, Y_test, maxItem = 100):
 # In[2]:
 
 
-def load_QRIFaceData(datapath = '/media/xiang/60DA18E2DA18B5EE/projects/computerVision/QRI_faces_clean/'):
+def load_QRIFaceData(datapath = './QRI_faces_clean/'):
     
     FaceData = []
     labels = []
@@ -54,6 +54,8 @@ def load_QRIFaceData(datapath = '/media/xiang/60DA18E2DA18B5EE/projects/computer
         #im = np.transpose(im, (2,0,1))
         #im = np.transpose(im,[2,0,1])
         FaceData.append(im)
+        labels.append(i)
+        FaceData.append(im[:,:,::-1])
         labels.append(i)
         name_list.append(facefile[0:-4])
 
